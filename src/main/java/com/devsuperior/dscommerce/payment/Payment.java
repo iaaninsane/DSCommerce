@@ -1,19 +1,15 @@
-package com.devsuperior.dscommerce.order;
+package com.devsuperior.dscommerce.payment;
 
 import java.time.Instant;
 
-import com.devsuperior.dscommerce.enums.OrderStatus;
-import com.devsuperior.dscommerce.payment.Payment;
-import com.devsuperior.dscommerce.user.User;
+import com.devsuperior.dscommerce.order.Order;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,11 +17,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_order")
+@Table(name = "tb_payment")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class Payment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,13 +30,8 @@ public class Order {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant moment;
 	
-	@Column
-	private OrderStatus status;
+	@OneToOne
+	@MapsId
+	private Order order;
 
-	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private User client;
-	
-	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-	private Payment payment;
 }
