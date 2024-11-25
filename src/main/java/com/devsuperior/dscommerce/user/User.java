@@ -1,6 +1,7 @@
 package com.devsuperior.dscommerce.user;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.devsuperior.dscommerce.order.Order;
@@ -43,6 +44,6 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Order> orders;
+	private List<Order> orders = new ArrayList<>();
 	
 }
