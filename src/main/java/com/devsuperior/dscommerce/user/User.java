@@ -43,7 +43,7 @@ public class User {
 	@Column
 	private String password;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 	
 }
