@@ -1,8 +1,7 @@
 package com.devsuperior.dscommerce.product;
 
-import java.util.Optional;
-
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,24 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/products")
 public class ProductController {
 	
-	private ProductRepository productRepository;
+	private ProductService productService;
 	
-	
-	
-	public ProductController(ProductRepository productRepository) {
-
-		this.productRepository = productRepository;
-	}
-
-
-
-	@GetMapping
-	public String getProductById() {
+	public ProductController(ProductService productService) {
 		
-		Optional<Product> result = productRepository.findById(1L);
-		Product product = result.get();
-		return product.getName();
+		this.productService = productService;
+	}
+
+	@GetMapping("/{id}")
+	public ProductDTO getProductById(@PathVariable Long id) {
+		
+		return productService.findProduct(id);
 	}
 	
-
 }
