@@ -33,5 +33,19 @@ public class ProductService {
 		
 		return result.map(pr -> new ProductDTO(pr));
 	}
+	
+	@Transactional
+	public ProductDTO saveProduct(ProductDTO productDTO) {
+
+		Product entityProduct = Product.builder()
+				.name(productDTO.getName())
+				.description(productDTO.getDescription())
+				.price(productDTO.getPrice())
+				.imgUrl(productDTO.getImgUrl())
+				.build();
+		
+		entityProduct = productRepository.save(entityProduct);
+		return new ProductDTO(entityProduct);
+	}
 
 }
