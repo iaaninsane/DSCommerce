@@ -2,6 +2,7 @@ package com.devsuperior.dscommerce.product;
 
 import java.net.URI;
 
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class ProductController {
 	}
 
 	@PostMapping
-	public ResponseEntity<ProductDTO> insertProduct(@RequestBody ProductDTO productDTO) {
+	public ResponseEntity<ProductDTO> insertProduct(@Valid @RequestBody ProductDTO productDTO) {
 
 		productDTO = productService.saveProduct(productDTO);
 
@@ -50,7 +51,7 @@ public class ProductController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ProductDTO> renewProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+	public ResponseEntity<ProductDTO> renewProduct(@PathVariable Long id, @Valid @RequestBody ProductDTO productDTO) {
 
 		productDTO = productService.updateProduct(id, productDTO);
 
